@@ -16,14 +16,12 @@
   height: auto;
 }
 .labelArea{
-  margin-top: 60rpx;
-  margin-left: 126rpx;
-  margin-bottom: 544rpx;
+  margin: 60rpx 124rpx 544rpx 126rpx;
 }
 .label{
   float: left;
   margin-right: 20rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 30rpx;
   border: 1px solid #979797;
   height: 56rpx;
   text-align: center;
