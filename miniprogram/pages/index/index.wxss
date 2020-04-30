@@ -47,7 +47,7 @@
   background-color: #3172ee;
 }
 .tapArea{
-  width: 220rpx;
+  width: 250rpx;
   height: 100rpx;
   display: flex;
   margin-top: 14rpx;
