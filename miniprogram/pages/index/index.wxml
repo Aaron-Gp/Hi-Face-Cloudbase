@@ -8,11 +8,11 @@
     </view>
   </view>
 </view>
-
 <view class="bottom">
   <view class="tapArea" bindtap="chooseImg">
     <image src="{{uploadImg}}"></image>
     <text>上传</text>
   </view>
+  <text class="copyright">{{copyright}}</text>
   <view class="line"></view>
 </view>

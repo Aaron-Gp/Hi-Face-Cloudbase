@@ -16,7 +16,7 @@
   height: auto;
 }
 .labelArea{
-  margin: 60rpx 124rpx 544rpx 126rpx;
+  margin: 60rpx 124rpx 460rpx 126rpx;
 }
 .label{
   float: left;
@@ -46,7 +46,7 @@
 }
 .tapArea{
   width: 250rpx;
-  height: 100rpx;
+  height: 86rpx;
   display: flex;
   margin-top: 14rpx;
   margin-left: 254rpx;
@@ -69,11 +69,22 @@
   line-height:50rpx;
   letter-spacing:4rpx;
 }
+.copyright{
+  margin-left: 40rpx;
+  /* padding-bottom: 20rpx; */
+  /* height:36rpx; */
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:#ddd;
+  line-height:36rpx;
+}
 .bottom .line{
+  position: absolute;
   margin-left: 190rpx;
-  margin-top: 34rpx;
+  margin-top: 6rpx;
   width:185px;
-  height:7px;
+  height:14rpx;
   background:rgba(0,0,0,1);
-  border-radius:17px;
+  border-radius:34rpx;
 }

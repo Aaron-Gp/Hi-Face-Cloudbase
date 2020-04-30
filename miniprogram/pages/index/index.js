@@ -176,6 +176,7 @@ Page({
   // },
 
   data: {
+    copyright: "Copyright © 2020 Aaron Gao, All rights reserved.",
     desc: "上传图片，会自动显示图片的主要特征标签",
     // openid: '',
     mark: false,
