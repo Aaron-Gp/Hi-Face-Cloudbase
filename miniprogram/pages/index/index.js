@@ -33,6 +33,7 @@ Page({
       // console.log(res.tempFilePaths)
       const filePath = res.tempFilePaths[0]
       const cloudPath = `face-cut/${Date.now()}-${Math.floor(Math.random(0, 1) * 1000)}` + filePath.match(/\.[^.]+?$/)[0]
+      
       wx.cloud.uploadFile({
         cloudPath,
         filePath,
@@ -133,10 +134,12 @@ Page({
     .then(res => {
       console.log(res)
       const labels = res.result.data.RecognitionResult.Labels
+      const header = 'https://636c-cloudservices-636o8-1301351686.tcb.qcloud.la/'
       console.log(labels)
+      this.setMargin((header + cloudPath))
       this.setData({
         labels,
-        originalImg: `https://636c-cloudservices-636o8-1301351686.tcb.qcloud.la/${cloudPath}`
+        originalImg: header + cloudPath
       })
       console.log(this.data.labels)
       wx.hideToast()
@@ -148,6 +151,25 @@ Page({
         title: '云函数调用失败，问题已上报',
         icon: 'none'
       })
+    })
+  },
+ 
+  setMargin(filePath){
+    wx.getImageInfo({
+      src: filePath,
+    })
+    .then(res => {
+      const margin = (424 - (res.height / res.width) * 300) * 2
+      if (margin > 340) {
+        this.setData({
+          margin: margin + 'rpx' 
+        })
+        console.log('margin', margin)
+      }
+      console.log(this.data.margin)
+    })
+    .catch(err =>{
+      console.log(err)
     })
   },
 
@@ -187,6 +209,7 @@ Page({
     labels: [],
     userData: [],
     fileID: '',
+    margin: ''
   },
 
   onShow(){

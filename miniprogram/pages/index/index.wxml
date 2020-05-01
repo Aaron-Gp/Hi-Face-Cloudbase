@@ -1,20 +1,26 @@
 <text class="desc">{{desc}}</text>
 
 <view class="wrapper">
+
   <image src="{{originalImg}}" class="original" mode="widthFix"></image>
+
   <view class="labelArea">
     <view wx:for="{{labels}}" wx:key="Name" class="label">
       <text>{{item.Name}}</text>
     </view>
   </view>
+
 </view>
+
+<view class="copyright" style="margin-top:{{margin}}">
+  <text>{{copyright}}</text>
+</view>
+
 <view class="bottom">
+
   <view class="tapArea" bindtap="chooseImg">
     <image src="{{uploadImg}}"></image>
     <text>上传</text>
   </view>
-  <view class="copyright">
-    <text class="copyright">{{copyright}}</text>
-  </view>
-  <view class="line"></view>
+
 </view>
