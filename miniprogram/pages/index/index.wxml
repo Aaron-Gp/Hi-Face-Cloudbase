@@ -1,6 +1,6 @@
 <text class="desc">{{desc}}</text>
 
-<view>
+<view class="wrapper">
   <image src="{{originalImg}}" class="original" mode="widthFix"></image>
   <view class="labelArea">
     <view wx:for="{{labels}}" wx:key="Name" class="label">

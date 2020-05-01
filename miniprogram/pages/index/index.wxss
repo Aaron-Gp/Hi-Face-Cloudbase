@@ -9,33 +9,37 @@
   color:rgba(170,170,170,1);
   line-height:40rpx;
 }
+.wrapper{
+  margin: 0 auto;
+}
 .original{
-  margin-left: 79rpx;
+  /* margin-left: 79rpx; */
   margin-top: 100rpx;
   width: 600rpx;
   height: auto;
 }
 .labelArea{
-  margin: 60rpx 124rpx 460rpx 126rpx;
+  margin: 60rpx auto 460rpx auto;
 }
 .label{
   float: left;
   margin-right: 20rpx;
   margin-bottom: 30rpx;
   border: 1px solid #979797;
-  height: 56rpx;
   text-align: center;
   align-items: center;
+  width: auto;
+  height: 52rpx;
 }
 .label text{
-  width:56rpx;
   height:40rpx;
   font-size:28rpx;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color: #000;
   line-height:40rpx;
-  padding: 8rpx 14rpx;
+  padding: 6rpx 12rpx;
+  display: block;
 }
 .bottom{
   position: fixed;
