@@ -13,6 +13,8 @@
     <image src="{{uploadImg}}"></image>
     <text>上传</text>
   </view>
-  <text class="copyright">{{copyright}}</text>
+  <view class="copyright">
+    <text class="copyright">{{copyright}}</text>
+  </view>
   <view class="line"></view>
 </view>

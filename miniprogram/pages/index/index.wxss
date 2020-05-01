@@ -70,9 +70,9 @@
   letter-spacing:4rpx;
 }
 .copyright{
-  margin-left: 40rpx;
-  /* padding-bottom: 20rpx; */
-  /* height:36rpx; */
+  text-align: center;
+}
+.copyright text{
   font-size:28rpx;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;

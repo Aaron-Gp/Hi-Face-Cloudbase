@@ -19,10 +19,13 @@ Page({
   },
 
   chooseImg: function () {
+    if (this.data.fileID) {
+      this.deleteFile()
+    }
     const that = this
     wx.chooseImage({
       count: 1,
-      sizeType: ['compressed'],
+      sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera']
     })
     .then(res => {
@@ -42,13 +45,15 @@ Page({
         // console.log('上传成功后获得的res：', res)
         that.setData({
           mark: false,
+          fileID: res.fileID,
         })
-        // console.log(imgurl)
+        console.log(this.data.fileID)
         that.detectImg(cloudPath)
       })
       .catch(err => {
           wx.showToast({
             title: '上传失败,请重新上传',
+            icon: 'none',
         })
         console.log(err)
       })
@@ -59,6 +64,7 @@ Page({
         icon: "none"
       })
       console.log(err)
+      this.reportErr(err)
     })
   },
 
@@ -67,7 +73,7 @@ Page({
     wx.showToast({
       title: '图像检测中',
       icon: 'loading',
-      duration: 10000
+      duration: 1000000
     })
     console.log('loading...')
     wx.cloud.callFunction({
@@ -108,14 +114,7 @@ Page({
     })
     .catch(err => {
       console.log(err)
-      const _id= this.data.userData.data[0]._id
-      db.collection('error_report').doc(_id).update({
-        data: {
-          "error_messages": _.push({
-            err
-          })
-        }
-      })
+      this.reportErr(err)
       wx.showToast({
         title: '云函数调用失败，问题已上报',
         icon: 'none'
@@ -144,14 +143,7 @@ Page({
     })
     .catch(err => {
       console.log(err)
-      const _id= this.data.userData.data[0]._id
-      db.collection('error_report').doc(_id).update({
-        data: {
-          "error_messages": _.push({
-            err
-          })
-        }
-      })
+      this.reportErr(err)
       wx.showToast({
         title: '云函数调用失败，问题已上报',
         icon: 'none'
@@ -159,21 +151,31 @@ Page({
     })
   },
 
-  // onGetOpenid(){
-  //   wx.cloud.callFunction({
-  //     name: 'login'
-  //   })
-  //   .then(res => {
-  //     const openid = res.result.openid
-  //     console.log('login', openid)
-  //     this.setData({
-  //       openid
-  //     })
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //   })
-  // },
+  deleteFile(){
+    const fileID = this.data.fileID
+    console.log(fileID)
+    wx.cloud.deleteFile({
+      fileList: [fileID]
+    })
+    .then(res => {
+      console.log('文件删除成功',res.fileList)
+    })
+    .catch(err => {
+      console.error(err)
+      this.reportErr(err)
+    })
+  },
+
+  reportErr(err){
+    const _id= this.data.userData.data[0]._id
+    db.collection('error_report').doc(_id).update({
+      data: {
+        "error_messages": _.push({
+          err
+        })
+      }
+    })
+  },
 
   data: {
     copyright: "Copyright © 2020 Aaron Gao, All rights reserved.",
@@ -184,6 +186,7 @@ Page({
     uploadImg: '/images/upload.png',
     labels: [],
     userData: [],
+    fileID: '',
   },
 
   onShow(){
@@ -191,7 +194,12 @@ Page({
   },
 
   onLoad(){
-    // this.onGetOpenid()
-    this.checkUser()
+    // this.checkUser()
+  },
+
+  onHide(){
+    if (this.data.fileID) {
+      this.deleteFile()
+    }
   }
 })
