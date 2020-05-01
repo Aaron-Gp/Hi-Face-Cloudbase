@@ -159,8 +159,9 @@ Page({
       src: filePath,
     })
     .then(res => {
-      const margin = (424 - (res.height / res.width) * 300) * 2
-      if (margin > 340) {
+      var margin = (476 - res.height * (300 / res.width)) * 2
+      margin = this.data.isIphoneX? margin:(margin+68)
+      if (margin > 416) {
         this.setData({
           margin: margin + 'rpx' 
         })
@@ -209,11 +210,31 @@ Page({
     labels: [],
     userData: [],
     fileID: '',
-    margin: ''
+    margin: '',
+    height: '',
+    isIphoneX: false
   },
 
   onShow(){
     wx.hideHomeButton()
+    wx.getSystemInfo()
+    .then(res => {
+      if (res.model === 'iPhone X') {
+        this.setData({
+          height : '188rpx',
+          isIphoneX: true
+        })
+      }
+      else {
+        this.setData({
+          margin: '484rpx'
+        })
+      }
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   },
 
   onLoad(){

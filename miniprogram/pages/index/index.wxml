@@ -3,10 +3,12 @@
 <view class="wrapper">
 
   <image src="{{originalImg}}" class="original" mode="widthFix"></image>
-
-  <view class="labelArea">
-    <view wx:for="{{labels}}" wx:key="Name" class="label">
-      <text>{{item.Name}}</text>
+ 
+  <view class="labelWrap">
+    <view class="labelArea">
+      <view wx:for="{{labels}}" wx:key="Name" class="label">
+        <text>{{item.Name}}</text>
+      </view>
     </view>
   </view>
 
@@ -16,7 +18,7 @@
   <text>{{copyright}}</text>
 </view>
 
-<view class="bottom">
+<view class="bottom" style="height:{{height}}">
 
   <view class="tapArea" bindtap="chooseImg">
     <image src="{{uploadImg}}"></image>
