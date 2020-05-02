@@ -279,7 +279,7 @@ Page({
   },
 
   onLoad(){
-    // this.checkUser()
+    this.checkUser()
     this.modelAdaptation()
   },
 
