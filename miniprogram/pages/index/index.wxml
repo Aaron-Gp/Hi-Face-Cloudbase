@@ -1,6 +1,6 @@
 <text class="desc">{{desc}}</text>
 
-<view class="wrapper">
+<view class="wrapper" style="min-height:{{minHeight}}">
 
   <image src="{{originalImg}}" class="original" mode="widthFix"></image>
  
@@ -14,7 +14,7 @@
 
 </view>
 
-<view class="copyright" style="margin-top:{{margin}}">
+<view class="copyright" style="margin-bottom:{{bottom}}">
   <text>{{copyright}}</text>
 </view>
 

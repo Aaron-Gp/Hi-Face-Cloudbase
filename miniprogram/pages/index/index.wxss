@@ -11,7 +11,7 @@
 }
 .wrapper{
   position: relative;
-  min-height: 500rpx;
+  min-height: 1104rpx;
   margin: 0 75rpx;
 }
 .original{
@@ -83,9 +83,9 @@
 .copyright{
   position: relative;
   /* width: 100vw; */
-  margin-top: 416rpx;
-  margin-bottom: calc(156rpx+ constant(safe-area-inset-bottom));
-  margin-bottom: calc(156rpx + env(safe-area-inset-bottom));
+  /* margin-top: 416rpx; */
+  margin-bottom: calc(208rpx+ constant(safe-area-inset-bottom));
+  margin-bottom: calc(208rpx + env(safe-area-inset-bottom));
   text-align: center;
   height: 36rpx;
   line-height: 36rpx;

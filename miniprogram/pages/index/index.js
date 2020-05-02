@@ -159,15 +159,25 @@ Page({
       src: filePath,
     })
     .then(res => {
-      var margin = (476 - res.height * (300 / res.width)) * 2
-      margin = this.data.isIphoneX? margin:(margin+68)
-      if (margin > 416) {
+      console.log('res.height', res.height)
+      var minHeight = (230 + res.height * (300 / res.width)) * 2
+      console.log(this.data.lockHeight)
+      // margin = this.data.isIphoneX? margin:(margin+68)
+      console.log('before', minHeight)
+      var orgheight = this.data.lockHeight.replace(/rpx/, '')
+      console.log('orgheight', orgheight)
+      if (minHeight > orgheight) {
         this.setData({
-          margin: margin + 'rpx' 
+          minHeight: minHeight + 'rpx'
         })
-        console.log('margin', margin)
+        console.log('margin', minHeight)
       }
-      console.log(this.data.margin)
+      else {
+        this.setData({
+          minHeight: this.data.lockHeight
+        })
+      }
+      console.log(this.data.minHeight)
     })
     .catch(err =>{
       console.log(err)
@@ -210,9 +220,11 @@ Page({
     labels: [],
     userData: [],
     fileID: '',
-    margin: '',
+    minHeight: '1104rpx',
     height: '',
-    isIphoneX: false
+    isIphoneX: false,
+    bottom: '',
+    lockHeight: '1104rpx'
   },
 
   onShow(){
@@ -221,14 +233,18 @@ Page({
     .then(res => {
       if (res.model === 'iPhone X') {
         this.setData({
-          height : '188rpx',
+          height: '188rpx',
           isIphoneX: true
         })
       }
       else {
+        const minHeight = (res.windowHeight -138) * 2
         this.setData({
-          margin: '484rpx'
+          minHeight: minHeight + 'rpx',
+          bottom: '140rpx',
+          lockHeight: minHeight + 'rpx',
         })
+        console.log("minHeight", minHeight)
       }
       console.log(res)
     })
