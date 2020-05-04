@@ -1,0 +1,71 @@
+[
+  {
+    "name": "fileID",
+    "value": {
+      "fileID": ""
+    }
+  },
+  {
+    "name": "safeCheck",
+    "value": {
+      "fileID": "cloud://cloudservices-636o8.636c-cloudservices-636o8-1301351686/cloudbase/test.png",
+      "threshold": 75,
+      "checkOpts": [
+        "porn",
+        "terrorist",
+        "politics"
+      ],
+      "options": [
+        "safeCheck"
+      ]
+    }
+  },
+  {
+    "name": "detectLabel",
+    "value": {
+      "fileID": "cloud://cloudservices-636o8.636c-cloudservices-636o8-1301351686/cloudbase/test.png",
+      "threshold": 75,
+      "checkOpts": [
+        "porn",
+        "terrorist",
+        "politics"
+      ],
+      "options": [
+        "detectLabel",
+        "safeCheck"
+      ]
+    }
+  },
+  {
+    "name": "mainColor",
+    "value": {
+      "fileID": "cloud://cloudservices-636o8.636c-cloudservices-636o8-1301351686/cloudbase/test.png",
+      "threshold": 75,
+      "checkOpts": [
+        "porn",
+        "terrorist",
+        "politics"
+      ],
+      "options": [
+        "safeCheck",
+        "mainColor"
+      ]
+    }
+  },
+  {
+    "name": "detectFace",
+    "value": {
+      "fileID": "cloud://cloudservices-636o8.636c-cloudservices-636o8-1301351686/cloudbase/test.png",
+      "threshold": 75,
+      "checkOpts": [
+        "porn",
+        "terrorist",
+        "politics"
+      ],
+      "options": [
+        "safeCheck",
+        "detectFace"
+      ]
+    }
+  }
+]

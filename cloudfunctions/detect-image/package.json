@@ -1,5 +1,5 @@
 {
-  "name": "detectImg",
+  "name": "detect-image",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cloudbase/extension-ci": "^0.1.0",
+    "@cloudbase/extension-ci": "^0.2.2",
+    "axios": "^0.19.2",
+    "tencentcloud-sdk-nodejs": "^3.0.163",
     "wx-server-sdk": "~1.8.3"
   }
 }

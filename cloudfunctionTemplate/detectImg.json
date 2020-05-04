@@ -1,0 +1,14 @@
+[
+  {
+    "name": "safeCheck",
+    "value": {
+      "fileID": "cloud://cloudservices-636o8.636c-cloudservices-636o8-1301351686/cloudbase/porn-2.jpg",
+      "threshold": 75,
+      "checkOpts": [
+        "porn",
+        "terrorist",
+        "politics"
+      ]
+    }
+  }
+]

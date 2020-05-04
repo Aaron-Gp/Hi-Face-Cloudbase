@@ -1,3 +1,5 @@
+import config from '../../config'
+
 const db = wx.cloud.database()
 const _ = db.command
 
@@ -28,7 +30,7 @@ Page({
     const that = this
     wx.chooseImage({
       count: 1,
-      sizeType: ['original', 'compressed'],
+      sizeType: ['compressed'],
       sourceType: ['album', 'camera']
     })
     .then(res => {
@@ -52,7 +54,7 @@ Page({
           fileID: res.fileID,
         })
         // console.log('fileID', this.data.fileID)
-        that.detectImg(cloudPath)
+        that.detectImg(res.fileID)
       })
       .catch(err => {
         wx.showToast({
@@ -71,45 +73,27 @@ Page({
     })
   },
 
-  //图像安全审核
-  detectImg(cloudPath) {
-    console.log('detectImg...')
+  //图像操作
+  detectImg(fileID) {
+    console.log('Processing...')
     wx.showToast({
       title: '图像检测中',
       icon: 'loading',
       duration: 1000000
     })
     wx.cloud.callFunction({
-      name: 'detectImg',
+      name: 'detect-image',
       data: {
-        cloudPath: cloudPath
+        options: ["safeCheck", "detectLabel"],
+        fileID: fileID,
+        checkOpts: ["porn", "terrorist", "politics"],
+        threshold: 75
       }
     })
     .then(res => {
-      // console.log('detect-res', res)
-      const recog = res.result.data.RecognitionResult
-      // console.log(recog)
-
-      for (const info in recog){
-        let flag = recog[info].HitFlag
-        let score = recog[info].Score
-        // console.log(info, flag, score)
-
-        //判断图像审核分数是否在阈值以内
-        if(flag === 1 || score >= 75){
-          this.setData({
-            mark: true
-          })
-        }
-      }
-
-      //判断审核是否通过
-      if(this.data.mark === false)
-      {
-        // console.log('安全')
-        this.detectLabel(cloudPath)
-      }
-      else{
+      console.log(res)
+      const hit = res.result.hit
+      if(hit){
         this.deleteFile()
         wx.showToast({
           title: '图片中含有敏感信息',
@@ -122,37 +106,17 @@ Page({
           minHeight: this.data.lockHeight
         })
       }
-    })
-    .catch(err => {
-      console.log(err)
-      this.reportErr(err)
-      wx.showToast({
-        title: '云函数调用失败，问题已上报',
-        icon: 'none'
-      })
-    })
-  },
-
-  //图像标签
-  detectLabel(cloudPath){
-    console.log("detectLabel...")
-    wx.cloud.callFunction({
-      name: "label",
-      data: {
-        cloudPath: cloudPath
+      else {
+        const labels = res.result.labels
+        const originalImg = res.result.imageUrl
+        console.log(labels)
+        this.setMargin(originalImg)
+        this.setData({
+          labels,
+          originalImg
+        })
+        wx.hideToast()
       }
-    })
-    .then(res => {
-      // console.log('label-res',res)
-      const labels = res.result.data.RecognitionResult.Labels
-      const header = 'https://636c-cloudservices-636o8-1301351686.tcb.qcloud.la/'
-      // console.log(labels)
-      this.setMargin((header + cloudPath))
-      this.setData({
-        labels,
-        originalImg: header + cloudPath
-      })
-      wx.hideToast()
     })
     .catch(err => {
       console.log(err)
@@ -232,9 +196,8 @@ Page({
   data: {
     copyright: "Copyright © 2020 Aaron Gao, All rights reserved.",
     desc: "上传图片，会自动显示图片的主要特征标签",
-    mark: false, //标记图像是否安全
-    originalImg:'/images/original.png', //中央图像
-    uploadImg: '/images/upload.png', //上传图标
+    originalImg:'/images/original@2x.png', //中央图像
+    uploadImg: '/images/upload@2x.png', //上传图标
     labels: [],
     userData: [], //用于上报错误
     fileID: '', //用于删除图像

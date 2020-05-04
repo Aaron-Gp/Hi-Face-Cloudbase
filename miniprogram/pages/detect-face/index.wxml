@@ -1,0 +1,47 @@
+<view class="page" style="background-color:{{pageMainColor}}; padding-top:{{barHeight}}">
+
+  <view class="page-title">人脸识别</view>
+
+  <view class="wrapper">
+    <view class="choose-image" hidden="{{isActive}}" style="background-image:url({{centerIcon}})"></view>
+    <view class="shape-wrap" hidden="{{!isActive}}">
+      <image src="{{faceImage}}" mode="widthFix" class="face-image"></image>
+      <view wx:for="{{infoList}}" wx:key="shapeIndex" style="float:left">
+        <view style="left:{{item.left+'rpx'}};top:{{item.top+'rpx'}};width:{{item.width+'rpx'}};height:{{item.height+'rpx'}}" class="shape-item {{currentShapeIndex===item.shapeIndex?'shape-item-active':''}}">
+          <view class="shape-area" bindtap="chooseShape" data-index="{{item.shapeIndex}}">
+            <view class="face-line left-top"></view>
+            <view class="face-line right-top"></view>
+            <view class="face-line left-bottom"></view>
+            <view class="face-line right-bottom"></view>
+          </view>
+          <view class="shape-desc {{item.left+item.width + 250 >600?'in-left':'in-right'}}" hidden="{{currentShapeIndex!==item.shapeIndex}}">
+            <View>年龄: {{item.age}}</View>
+            <View>表情: {{item.expressionStr}}</View>
+            <View>魅力: {{item.beauty}}</View>
+            <View>眼镜: {{item.glassStr}}</View>
+            <View>帽子: {{item.hatStr}}</View>
+            <View>口罩: {{item.maskStr}}</View>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="desc">{{desc}}</view>
+    <scroll-view scroll-x="true" class="cut-wrap">
+      <image src="{{faceImage}}" mode="aspectFit" bindtap="chooseShape" hidden="{{!isActive}}" class="cut-item {{currentShapeIndex === -1 ? 'cut-item-active':''}}" data-index="{{-1}}"></image>
+      <view wx:for="{{showCutList}}" wx:key="fileID" style="display:inline">
+        <image src="{{item.cutFileUrl}}" bindtap="chooseShape" mode="aspectFit" data-index="{{item.shapeIndex}}" class="cut-item {{currentShapeIndex===item.shapeIndex?'cut-item-active':''}}"></image>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="copyright" style="bottom:calc({{bottom}} + constant(safe-area-inset-bottom)); bottom: calc({{bottom}} + env(safe-area-inset-bottom))">{{copyright}}</view>
+
+
+  <view class="bottom" style="height:{{height}}">
+    <view class="tapArea" bindtap="chooseImg">
+      <image src="{{uploadImg}}"></image>
+      <text>上传</text>
+    </view>
+  </view>
+
+</view>

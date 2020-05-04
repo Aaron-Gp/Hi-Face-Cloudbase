@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/detect-face/index",
+    "pages/detect-label/index"
   ],
   "window": {
     "backgroundColor": "#f6f6f6",
@@ -10,8 +11,8 @@
     "navigationBarTextStyle": "black"
   },
   "networkTimeout": {
-    "request": 30000,
-    "downloadFile": 20000
+    "request": 20000,
+    "downloadFile": 10000
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
