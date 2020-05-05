@@ -1,0 +1,70 @@
+<view class="page">
+  <canvas class="canvas-mask" canvas-id="canvasMask" style="width:{{DPR_CANVAS_SIZE * pixelRatio + 'px'}}; height:{{DPR_CANVAS_SIZE * pixelRatio + 'px'}}"></canvas>
+  <view class="main-wrap">
+    <view class="image-position">
+      <view class="choose-image" data-way="album" bindtap="chooseImage" hidden="{{cutImage}}"></view>
+      <view class="image-wrap" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" hidden="{{!cutImage}}">
+        <image src="{{cutImage}}" mode="WidthFix" class="main-image"></image>
+        <view class="mask-container" wx:for="{{shapeList}}" wx:for-index="shapeIndex" wx:for-item="shape" wx:key="timeNow" hidden="{{!isShowMask}}" style="width: {{shape.maskWidth}}px; height:  {{shape.maskWidth}}px; transform: translate({{  shape.maskCenterX -  shape.maskWidth / 2 - 2 + 'px'}}, {{shape.maskCenterY -  shape.maskWidth / 2 - 2 + 'px'}}) rotate({{shape.rotate}}deg); z-index: {{shapeIndex === currentShapeIndex ? 2 : 1}}">
+          <image class="mask" data-type="mask" data-index="{{shapeIndex}}" src="../../images/mask-{{shape.currentMaskId}}.png" style="transform: scale({{shape.reserve}}, 1)"></image>
+          <block wx:if="{{currentShapeIndex===shapeIndex}}">
+            <view class="image-btn-remove" data-index="{{shapeIndex}}" bindtap="removeShape"></view>
+            <view class="image-btn-resize" data-index="{{shapeIndex}}" data-type="resize" bindtap="resizeShape"></view>
+            <view class="image-btn-reverse" data-index="{{shapeIndex}}" bindtap="reverseShape"></view>
+            <view class="image-btn-checked" data-index="{{shapeIndex}}" bindtap="checkedShape"></view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="btn-wrap" hidden="{{!cutImage}}">
+      <view class="btn-remove" bindtap="removeImage">移除图片</view>
+      <view class="btn-generate" bindtap="generateImage">保存图片</view>
+    </view>
+    <view class="btn-wrap" hidden="{{cutImage}}">
+      <view class="btn-desc">更多选择</view>
+      <button class="btn-avatar" data-way="avatar" open-type="getUserInfo" bindgetuserinfo="getUserInfo">使用头像</button>
+      <button class="btn-camera" data-way="camera" bindtap="chooseImage">使用相机</button>
+    </view>
+  </view>
+  <view class="cropper-wrap" hidden="{{!originImage}}">
+    <image-cropper id="image-cropper" export_scale="{{pixelRatio}}" limit_move="{{true}}" disable_rotate="{{true}}" disable_width="{{true}}" disable_height="{{true}}" width="{{DPR_CANVAS_SIZE}}" height="{{DPR_CANVAS_SIZE}}" imgSrc="{{originImage}}" bindload="cropperLoad" bindimageload="cropperImageLoad"></image-cropper>
+    <view class="cropper-bottom">
+      <view class="cropper-bottom-btn" bindtap="cutCancel">取消</view>
+      <view class="cropper-bottom-btn" bindtap="cutSubmit">确认</view>
+    </view>
+  </view>
+  <view class="copyright">{{copyright}}</view>
+  <view class="tab-wrap" hidden="{{!cutImage}}">
+    <view class="tab-bd">
+      <view wx:key="name" wx:for="{{materialList}}" style="display:{{currentTabIndex===index?'block':'none'}}" wx:for-item="item" wx:for-index="index">
+        <scroll-view class="mask-wrap" scroll-x="{{true}}">
+          <image wx:for="{{item.imgList}}" wx:for-item="imgId" wx:key="*this" class="tab-bd-image tab-bd-{{item.name}}"  src="../../images/{{item.name}}-{{imgId}}.png" bindtap="chooseMask" data-mask-id="{{imgId}}"></image>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-desc-wrap" hidden="{{cutImage}}">
+    <text>
+      {{'备注：\n选择后会识别图中人脸，并自动戴上口罩\n识别过程需几秒钟，请耐心等待'}}
+    </text>
+  </view>
+  <view class="{{'poster-dialog ' + (isShowPoster ? 'show' : '')}}">
+    <view class="poster-dialog-main">
+      <block wx:if="{{posterSrc}}">
+        <image class="poster-image" src="{{posterSrc}}" bindtap="previewPoster" show-menu-by-longpress="{{true}}" ></image>
+      </block>
+      <view class="poster-image-tips">点击可预览大图，长按可分享图片</view>
+      <view class="poster-dialog-close" bindtap="onHidePoster"></view>
+      <view class="poster-footer-btn">
+        <view class="poster-btn-save" bindtap="savePoster">
+          <image class="icon" src="https://n1image.hjfile.cn/res7/2019/01/03/740198f541ce91859ed060882d986e09.png"></image>
+          保存到相册
+        </view>
+        <button class="poster-btn-share" open-type="share" data-poster-src="{{posterSrc}}">
+          <image class="icon-wechat" src="https://n1image.hjfile.cn/res7/2019/03/20/21af29d7755905b08d9f517223df5314.png"></image>
+          分享给朋友
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

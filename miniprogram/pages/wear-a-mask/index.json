@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "戴口罩",
+  "disableScroll": true,
+  "usingComponents": {
+    "image-cropper": "../../components/image-cropper/image-cropper"
+ }
+}

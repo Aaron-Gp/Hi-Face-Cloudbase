@@ -2,6 +2,7 @@ const extCi = require("@cloudbase/extension-ci")
 const tcb = require('tcb-admin-node')
 const axios = require('axios')
 const detectFace = require('./post').detectFace
+const analyzeFace = require('./post').analyzeFace
 
 tcb.init({
   env: 'cloudservices-636o8'
@@ -152,6 +153,25 @@ exports.main = async (event) => {
         })
         // console.log(faceInfo)
         result.faceInfo = faceInfo
+      }
+      if (options.indexOf('analyzeFace')+1) {
+        const {fileID, width=600, height=600} = event
+        const {cutImageUrl, base64File, faceID} = await getBuffer(fileID, width, height)
+        // console.log(cutImageUrl)
+        result.cutImageUrl = cutImageUrl
+        result.faceID = faceID
+        // console.log(base64File)
+        // console.log(faceID)
+        const faceFeature = await analyzeFace(base64File)
+        .then(res => {
+          console.log(res)
+          return res.data
+        })
+        .catch(err => {
+          console.log(err)
+          result.err = err
+        })
+        result.faceFeature = faceFeature
       }
     }
   }

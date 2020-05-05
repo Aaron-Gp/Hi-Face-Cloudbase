@@ -53,12 +53,9 @@ const detectFace = async (Image) => {
 const analyzeFace = (Image) => {
   let faceReq = new models.DetectFaceRequest()
 
-  console.log('Image :', Image, Image.includes('http'));
-  let query_string = JSON.stringify(Image.includes('http') ? {
-    Url: Image
-  } : {
+  let query_string = JSON.stringify({
       Image
-    })
+  })
   // 传入json参数
   faceReq.from_json_string(query_string);
 
@@ -68,18 +65,13 @@ const analyzeFace = (Image) => {
     client.AnalyzeFace(faceReq, function (error, response) {
       // 请求异常返回，打印异常信息
       if (error) {
-        const { code = '' } = error
-        console.log('code :', code);
-
-        resolve({
-          data: {},
-          time: new Date(),
-          status: -10086,
-          message: 'AnalyzeFace ' + status.FACE_CODE[code] || code || '图片解析失败'
-        })
-        return
+        console.log('err',error)
+        return error
       }
       console.log('AnalyzeFace response :', response)
+      resolve({
+        data: response
+      })
     })
   });
 }

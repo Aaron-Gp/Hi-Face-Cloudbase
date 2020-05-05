@@ -2,12 +2,25 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
-		"enhance": true
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"appid": "wxd01c7bb84fd638d1",
 	"projectname": "Hi-Face-Cloudbase",
@@ -55,6 +68,13 @@
 					"id": 2,
 					"name": "pages/detect-label/index",
 					"pathName": "pages/detect-label/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/wear-a-mask/index",
+					"pathName": "pages/wear-a-mask/index",
 					"query": "",
 					"scene": null
 				}

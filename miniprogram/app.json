@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/wear-a-mask/index",
     "pages/detect-face/index",
     "pages/detect-label/index"
   ],

@@ -67,5 +67,21 @@
         "detectFace"
       ]
     }
+  },
+  {
+    "name": "analyzeFace",
+    "value": {
+      "fileID": "cloud://cloudservices-636o8.636c-cloudservices-636o8-1301351686/cloudbase/test.png",
+      "threshold": 75,
+      "checkOpts": [
+        "porn",
+        "terrorist",
+        "politics"
+      ],
+      "options": [
+        "safeCheck",
+        "analyzeFace"
+      ]
+    }
   }
 ]
