@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@cloudbase/extension-ci": "^0.2.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "tencentcloud-sdk-nodejs": "^3.0.163",
     "wx-server-sdk": "~1.8.3"
   }
